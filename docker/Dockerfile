@@ -17,12 +17,12 @@ RUN pip3 install tensorflow-datasets
 # ARG DOWNLOAD_LINK=https://registrationcenter-download.intel.com/akdlm/irc_nas/17662/l_openvino_toolkit_p_2021.3.394.tgz
 # ARG INSTALL_DIR=/opt/intel/computer_vision_sdk
 # ARG TEMP_DIR=/tmp/openvino_installer
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     wget \
-#     cpio \
-#     sudo \
-#     lsb-release && \
-#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    cpio \
+    sudo \
+    lsb-release && \
+    rm -rf /var/lib/apt/lists/*
 # RUN mkdir -p $TEMP_DIR && cd $TEMP_DIR && \
 #     wget -c $DOWNLOAD_LINK && \
 #     tar xf l_openvino_toolkit*.tgz && \
