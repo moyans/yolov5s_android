@@ -5,6 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing
 RUN apt-get install -y python3 python3-pip
 RUN pip3 install --upgrade pip
+RUN pip3 config set global.index-url http://mirrors.aliyun.com/pypi/simple
+RUN pip3 config set install.trusted-host mirrors.aliyun.com
 RUN pip3 install tensorflow-gpu==2.4.0
 RUN pip3 install torch==1.7.0
 RUN pip3 install tensorflow-datasets
@@ -32,6 +34,8 @@ RUN pip3 install networkx
 RUN pip3 install defusedxml
 
 # install requirements for yolov5
+RUN git clone --recursive https://gitee.com/moyan_sun/yolov5s_android
+WORKDIR /yolov5s_android
 COPY yolov5/requirements.txt /yolov5/requirements.txt
 RUN cd /yolov5 && pip3 install -r requirements.txt
 RUN apt-get update --fix-missing
