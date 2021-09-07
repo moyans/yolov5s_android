@@ -32,30 +32,30 @@ RUN curl -fsSL -v -o ~/miniconda.sh -O  https://mirrors.tuna.tsinghua.edu.cn/ana
 RUN pip install --upgrade pip
 RUN pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
 RUN pip config set install.trusted-host mirrors.aliyun.com
-RUN pip install tensorflow-gpu==2.4.0 torch==1.7.0 tensorflow-datasets
+RUN pip install tensorflow-gpu==2.4.0 torch==1.7.0 
+RUN pip install tensorflow-datasets networkx defusedxml
 
 
-# # # install openvino
-# # ENV http_proxy $HTTP_PROXY
-# # ENV https_proxy $HTTP_PROXY
-# # ARG DOWNLOAD_LINK=https://registrationcenter-download.intel.com/akdlm/irc_nas/17662/l_openvino_toolkit_p_2021.3.394.tgz
-# # ARG INSTALL_DIR=/opt/intel/computer_vision_sdk
-# # ARG TEMP_DIR=/tmp/openvino_installer
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     wget \
-#     cpio \
-#     sudo \
-#     lsb-release && \
-#     rm -rf /var/lib/apt/lists/*
-# # RUN mkdir -p $TEMP_DIR && cd $TEMP_DIR && \
-# #     wget -c $DOWNLOAD_LINK && \
-# #     tar xf l_openvino_toolkit*.tgz && \
-# #     cd l_openvino_toolkit* && \
-# #     sed -i 's/decline/accept/g' silent.cfg && \
-# #     ./install.sh -s silent.cfg && \
-# #     rm -rf $TEMP_DIR
-# RUN pip3 install networkx
-# RUN pip3 install defusedxml
+# # install openvino
+ENV http_proxy $HTTP_PROXY
+ENV https_proxy $HTTP_PROXY
+ARG DOWNLOAD_LINK=https://registrationcenter-download.intel.com/akdlm/irc_nas/17662/l_openvino_toolkit_p_2021.3.394.tgz
+ARG INSTALL_DIR=/opt/intel/computer_vision_sdk
+ARG TEMP_DIR=/tmp/openvino_installer
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    cpio \
+    sudo \
+    lsb-release && \
+    rm -rf /var/lib/apt/lists/*
+RUN mkdir -p $TEMP_DIR && cd $TEMP_DIR && \
+    wget -c $DOWNLOAD_LINK && \
+    tar xf l_openvino_toolkit*.tgz && \
+    cd l_openvino_toolkit* && \
+    sed -i 's/decline/accept/g' silent.cfg && \
+    ./install.sh -s silent.cfg && \
+    rm -rf $TEMP_DIR
+
 
 # # install requirements for yolov5
 # # RUN git clone --recursive https://github.com/moyans/yolov5s_android yolov5s_android
