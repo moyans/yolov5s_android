@@ -27,10 +27,9 @@ class Detect(nn.Module):
             # bs, 20, 20, 255
             bs, ny, nx, _ = x[i].shape
             # bs, 20, 20, 3, 85 -> bs, 3, 20, 20, 85
-            x[i] = x[i].reshape(bs, ny, nx, 3, 85).permute(0, 3, 1, 2, 4).contiguous()
+            x[i] = x[i].reshape(bs, ny, nx, 3, self.no).permute(0, 3, 1, 2, 4).contiguous()
             if self.grid[i].shape[2:4] != x[i].shape[2:4]:
                 self.grid[i] = self._make_grid(nx, ny).to(x[i].device)
-
             y = x[i].sigmoid()
             y[..., 0:2] = (y[..., 0:2] * 2. - 0.5 + self.grid[i].to(x[i].device)) * self.stride[i]  # xy
             y[..., 2:4] = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # wh

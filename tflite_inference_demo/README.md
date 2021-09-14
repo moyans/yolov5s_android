@@ -1,4 +1,11 @@
+## 注意事项
+
+**需要通过get_anchor.py获取当前模型的anchor设置，同步修改  detector_head.py 中的anchorgrid 部分。**
+
+
+
 ## Detect
+
 Run detection for image.  
 ```sh
 usage: detect.py [-h] [--image IMAGE] [-m MODEL_PATH]
@@ -83,7 +90,7 @@ DONE (t=1.64s).
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.393
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.424
 ```
-  
+
 ### Example2
 You can load and evaluate json files in cocodt format.  
 This is how to evaluate the inference results by Android app:  
