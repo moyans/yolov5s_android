@@ -4,7 +4,11 @@
 #include <iostream>
 #include "nms.h"
 
+#define CLASS_NUM 80
+#define max_wh 4096
+
 using namespace std;
+
 
 float sigmoid(float f){
     return (float)(1.0f / (1.0f + exp(-f)));
@@ -15,8 +19,7 @@ float revsigmoid(float f){
     return -1.0f * (float)log((1.0f / (f + eps)) - 1.0f);
 }
 
-#define CLASS_NUM 80
-#define max_wh 4096
+
 void detector(
         vector<bbox>* bbox_candidates,
         JNIEnv *env,
